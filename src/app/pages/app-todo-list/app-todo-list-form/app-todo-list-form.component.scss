@@ -1,0 +1,65 @@
+.button-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+  line-height: 4;
+  cursor: pointer;
+}
+
+.title-container {
+  width: 100%;
+  margin-bottom: 24px;
+  border-bottom: #b8b8b8 solid 1px;
+}
+
+.form-content {
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .app-fields-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+
+  .button-disabled {
+    background-color: rgb(146, 146, 146);
+    color: white;
+    cursor: not-allowed;
+
+    &:hover {
+      background: rgb(146, 146, 146);
+    }
+  }
+
+  button {
+    background: #1976d2;
+    color: #ffffff;
+    height: 40px;
+    padding: 0 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background: #1964af;
+    }
+  }
+}

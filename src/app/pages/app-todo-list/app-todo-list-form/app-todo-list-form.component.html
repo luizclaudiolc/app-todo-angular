@@ -1,0 +1,48 @@
+<form class="form-content" (ngSubmit)="addOurEditTask()">
+  <div class="title-container">
+    <h2>{{ editMode ? "Editar Tarefa" : "Adicionar Tarefa" }}</h2>
+  </div>
+  <div class="app-fields-group">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Tarefa"
+        [(ngModel)]="task.title"
+        name="tarefa"
+        required
+        (input)="verifyInputs()"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea
+        matInput
+        placeholder="Descrição"
+        name="descricao"
+        [(ngModel)]="task.body"
+        required
+        (input)="verifyInputs()"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button
+      [disabled]="!verifyInputs()"
+      [class.button-disabled]="!verifyInputs()"
+      mat-button
+      type="submit"
+    >
+      {{ editMode ? "Salvar" : "Adicionar" }}
+    </button>
+  </div>
+</form>
+
+<button
+  class="button-close"
+  mat-fab
+  color="primary"
+  mat-button
+  (click)="closeDialog()"
+>
+  <mat-icon>close</mat-icon>
+</button>

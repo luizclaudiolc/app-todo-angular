@@ -1,1 +1,93 @@
-<p>app-todo-list works!</p>
+<div class="container">
+  <div class="header-container">
+    <h2>Lista de tarefas</h2>
+    <div class="header-content">
+      <mat-form-field class="search-field">
+        <input matInput (keyup)="searchTask($event)" placeholder="Buscar" />
+        <button mat-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+      <button class="button-add" mat-button (click)="openDialog()">
+        <mat-icon>add</mat-icon>Nova tarefa
+      </button>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="tasksInPage" class="mat-elevation-z8">
+    <ng-container *ngFor="let item of columnsTable; let i = index">
+      <ng-container
+        *ngIf="
+          columnsTableHeader[i] !== 'Feito' && columnsTableHeader[i] !== 'Ações'
+        "
+        [matColumnDef]="item"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ columnsTableHeader[i] }}</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element[columnsTable[i]] }}
+        </td>
+      </ng-container>
+      <ng-container
+        *ngIf="columnsTableHeader[i] === 'Feito'"
+        [matColumnDef]="item"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ columnsTableHeader[i] }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [(ngModel)]="element[columnsTable[i]]"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container
+        *ngIf="columnsTableHeader[i] === 'Ações'"
+        class="action-container"
+        [matColumnDef]="item"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ columnsTableHeader[i] }}</th>
+        <td mat-cell *matCellDef="let task">
+          <button
+            class="action-button"
+            (click)="openDialog(task)"
+            mat-flat-button
+          >
+            <mat-icon color="primary">edit</mat-icon>
+            <!-- (click)="deletarAluno(aluno.id)" -->
+          </button>
+          <button class="action-button" mat-flat-button>
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+    </ng-container>
+
+    <!-- <ng-container class="action-container" matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let aluno">
+        <button
+          class="action-button"
+          mat-icon-button
+          (click)="deletarAluno(aluno.id)"
+        >
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+        <button
+          class="action-button"
+          mat-icon-button
+          (click)="openDialog(aluno)"
+        >
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsTable"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="tasks.length"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+  ></mat-paginator>
+  <!-- (page)="onPageChange($event)" -->
+</div>
