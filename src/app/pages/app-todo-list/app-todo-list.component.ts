@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksService } from '../shared/services/tasks.service';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { tap } from 'rxjs';
 import { ITask } from '../shared/interfaces/task.interface';
+import { TasksService } from '../shared/services/tasks.service';
 import { AppTodoListFormComponent } from './app-todo-list-form/app-todo-list-form.component';
+import { SNACK_DEFAULT } from 'src/app/utils/app-utils';
 
 @Component({
   selector: 'app-app-todo-list',
@@ -20,7 +23,11 @@ export class AppTodoListComponent implements OnInit {
   pageSize: number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
-  constructor(private taskService: TasksService, public dialog: MatDialog) {}
+  constructor(
+    private taskService: TasksService,
+    public dialog: MatDialog,
+    private sneck: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getTasks();
@@ -54,18 +61,13 @@ export class AppTodoListComponent implements OnInit {
 
   openDialog(task?: ITask): void {
     const dialogRef = this.dialog.open(AppTodoListFormComponent, {
-      width: '550px',
+      width: `${window.screen.width * 0.8}px`,
+      height: `${window.screen.height * 0.45}px`,
       autoFocus: true,
       data: { task },
     });
 
-    dialogRef.afterClosed().subscribe((result) => this.getTasks());
-  }
-
-  update(): void {
-    const start = this.pageIndex * this.pageSize;
-    const end = start + this.pageSize;
-    this.tasksInPage = this.tasks.slice(start, end);
+    dialogRef.afterClosed().subscribe(() => this.getTasks());
   }
 
   deleteTask(task: ITask): void {
@@ -82,5 +84,25 @@ export class AppTodoListComponent implements OnInit {
         },
       });
     }
+  }
+
+  pageEvents({ pageIndex, pageSize }: PageEvent): void {
+    this.pageIndex = pageIndex;
+    this.pageSize = pageSize;
+    this.update();
+  }
+
+  update(): void {
+    const start = this.pageIndex * this.pageSize;
+    const end = start + this.pageSize;
+    this.tasksInPage = this.tasks.slice(start, end);
+  }
+
+  toggleDone(task: ITask) {
+    this.taskService.updateTask(task.id, task).subscribe({
+      next: (task) => this.sneck.open('Tarefa Atualizada!', 'x', SNACK_DEFAULT),
+      error: (error) =>
+        console.error('A tarefa não pode ser atualizada no menomento.', error),
+    });
   }
 }
