@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TasksService } from '../../shared/services/tasks.service';
 import { ITask } from '../../shared/interfaces/task.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-app-todo-list-form',
@@ -15,6 +16,7 @@ export class AppTodoListFormComponent implements OnInit {
   constructor(
     private serviceTask: TasksService,
     private dialogRef: MatDialogRef<AppTodoListFormComponent>,
+    private sneck: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask }
   ) {
     if (data && data.task) {
@@ -32,21 +34,16 @@ export class AppTodoListFormComponent implements OnInit {
     const task: ITask = { ...this.task, done: false };
     console.log('ADD', task);
 
-    this.serviceTask.createTask(task).subscribe();
-    this.dialogRef.close();
-
-    /* .subscribe(
-      (task) => {
+    this.serviceTask.createTask(task).subscribe({
+      next: (task) => {
         console.log(task);
-
-        // this.snackBar.open('Aluno adicionado com sucesso!', 'Fechar', {
-        //   duration: 2000,
-        // });
+        this.dialogRef.close();
+        this.sneck.open('Tarefa criada!', 'x', {
+          duration: 3000,
+        });
       },
-      (error) => {
-        console.error('Erro ao atualizar tarefa', error);
-      }
-    ); */
+      error: () => {},
+    });
   }
 
   private updateTask(id: number): void {
@@ -56,21 +53,13 @@ export class AppTodoListFormComponent implements OnInit {
       next: (task) => {
         console.log(task);
         this.dialogRef.close();
-        // this.snackBar.open('Tarefa Atualizada!', 'Fechar', {
-        //   duration: 2000,
-        // });
+        this.sneck.open('Tarefa Atualizada!', 'x', {
+          duration: 3000,
+          horizontalPosition: 'right',
+        });
       },
       error: () => {},
     });
-    /* () => {
-        // this.snackBar.open('Aluno Atualizado com sucesso!', 'Fechar', {
-        //   duration: 2000,
-        // });
-      },
-      (error: any) => {
-        console.error('Erro ao atualizar tarefa', error);
-      }
-    ); */
   }
 
   addOurEditTask(): void {

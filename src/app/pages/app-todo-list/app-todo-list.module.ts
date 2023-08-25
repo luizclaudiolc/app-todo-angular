@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { AppTodoListFormModule } from './app-todo-list-form/app-todo-list-form.module';
 import { AppTodoListComponent } from './app-todo-list.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const appComponents = [AppTodoListComponent];
 const appModules = [AppTodoListFormModule];
@@ -34,6 +35,7 @@ const NgModules = [
   MatButtonModule,
   MatExpansionModule,
   MatCheckboxModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

@@ -52,7 +52,11 @@
             <mat-icon color="primary">edit</mat-icon>
             <!-- (click)="deletarAluno(aluno.id)" -->
           </button>
-          <button class="action-button" mat-flat-button>
+          <button
+            class="action-button"
+            mat-flat-button
+            (click)="deleteTask(task)"
+          >
             <mat-icon color="warn">delete</mat-icon>
           </button>
         </td>

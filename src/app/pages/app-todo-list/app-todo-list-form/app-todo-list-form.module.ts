@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppTodoListFormComponent } from './app-todo-list-form.component';
 
 const appComponent = [AppTodoListFormComponent];
@@ -13,6 +14,7 @@ const ngModules = [
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

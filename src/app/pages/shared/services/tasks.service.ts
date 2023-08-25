@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITask } from '../interfaces/task.interface';
-import { environment } from 'src/app/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +29,6 @@ export class TasksService {
   }
 
   deleteTask(taskId: number): Observable<ITask> {
-    return this.http.delete<ITask>(`${environment.endpoint}/${taskId}`);
+    return this.http.delete<ITask>(`${environment.endpoint}/delete/${taskId}`);
   }
 }

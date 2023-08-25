@@ -53,32 +53,34 @@ export class AppTodoListComponent implements OnInit {
   }
 
   openDialog(task?: ITask): void {
-    if (task) {
-      const dialogRef = this.dialog.open(AppTodoListFormComponent, {
-        width: '550px',
-        autoFocus: true,
-        data: { task },
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        this.getTasks();
-      });
-      return;
-    }
-
     const dialogRef = this.dialog.open(AppTodoListFormComponent, {
       width: '550px',
-      height: '410px',
       autoFocus: true,
-      data: {},
+      data: { task },
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      this.getTasks();
-    });
+
+    dialogRef.afterClosed().subscribe((result) => this.getTasks());
   }
 
   update(): void {
     const start = this.pageIndex * this.pageSize;
     const end = start + this.pageSize;
     this.tasksInPage = this.tasks.slice(start, end);
+  }
+
+  deleteTask(task: ITask): void {
+    const { id: _id, title } = task;
+    const deleteConfirm = window.confirm(
+      `Tem certeza que quer excluir a tarefa: ${title}`
+    );
+
+    if (deleteConfirm) {
+      this.taskService.deleteTask(_id).subscribe({
+        next: () => {
+          this.tasks = this.tasks.filter(({ id }) => id !== _id);
+          this.getTasks();
+        },
+      });
+    }
   }
 }
