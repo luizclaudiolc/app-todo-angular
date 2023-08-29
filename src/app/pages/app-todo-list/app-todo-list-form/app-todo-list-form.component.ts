@@ -18,16 +18,16 @@ export class AppTodoListFormComponent implements OnInit {
     private serviceTask: TasksService,
     private dialogRef: MatDialogRef<AppTodoListFormComponent>,
     private snack: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: { task: ITask }
+    @Inject(MAT_DIALOG_DATA) public data: ITask
   ) {
-    if (data && data.task) {
-      this.task = { ...data.task };
+    if (data) {
+      this.task = data;
       this.editMode = true;
     }
   }
 
   ngOnInit(): void {
-    if (this.data.task) this.task = { ...this.data.task };
+    if (this.data) this.task = this.data;
   }
 
   private addTask(): void {

@@ -1,14 +1,14 @@
-<div class="container">
-  <div class="header-container">
+<div class="app-container">
+  <div class="app-header-container">
     <h2>Lista de tarefas</h2>
-    <div class="header-content">
-      <mat-form-field class="search-field">
+    <div class="app-header-content">
+      <mat-form-field class="app-search">
         <input matInput (keyup)="searchTask($event)" placeholder="Buscar" />
         <button mat-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
-      <button class="button-add" mat-button (click)="openDialog()">
+      <button class="app-button-add" mat-button (click)="openDialog()">
         <mat-icon>add</mat-icon>Nova tarefa
       </button>
     </div>
@@ -23,8 +23,8 @@
         [matColumnDef]="item"
       >
         <th mat-header-cell *matHeaderCellDef>{{ columnsTableHeader[i] }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element[columnsTable[i]] }}
+        <td mat-cell *matCellDef="let task">
+          {{ task[columnsTable[i]] }}
         </td>
       </ng-container>
       <ng-container
@@ -32,41 +32,47 @@
         [matColumnDef]="item"
       >
         <th mat-header-cell *matHeaderCellDef>{{ columnsTableHeader[i] }}</th>
-        <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let task">
           <mat-checkbox
-            [(ngModel)]="element[columnsTable[i]]"
-            (change)="toggleDone(element)"
+            [(ngModel)]="task[columnsTable[i]]"
+            (change)="toggleDone(task)"
           ></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container
         *ngIf="columnsTableHeader[i] === 'Ações'"
-        class="action-container"
+        class="app-action-container"
         [matColumnDef]="item"
       >
         <th mat-header-cell *matHeaderCellDef>{{ columnsTableHeader[i] }}</th>
         <td mat-cell *matCellDef="let task">
           <button
-            class="action-button"
+            mat-icon-button
+            class="app-action-button"
             (click)="openDialog(task)"
-            mat-flat-button
+            [disabled]="task.done"
           >
-            <mat-icon color="primary">edit</mat-icon>
+            <mat-icon>edit</mat-icon>
           </button>
           <button
-            class="action-button"
-            mat-flat-button
+            mat-icon-button
+            class="app-action-button"
             (click)="deleteTask(task)"
+            [disabled]="task.done"
           >
-            <mat-icon color="warn">delete</mat-icon>
+            <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsTable"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: columnsTable"
+      [ngClass]="{ 'app-done': row.done }"
+    ></tr>
   </table>
 
   <mat-paginator

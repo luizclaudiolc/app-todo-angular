@@ -4,61 +4,69 @@ $text-color: #e9c46a;
 $selected-link: #023047;
 $background-color: #f0f0f0;
 
-.container {
+.app-container {
   padding: 1.5rem 2rem 3rem;
   max-width: 100%;
   flex: auto;
 
+  .app-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+
+    button.app-button-add {
+      display: flex;
+      background: $default-color;
+      align-items: center;
+      justify-content: space-around;
+      min-width: 100px;
+      color: $side-nav-color;
+      padding: 0 40px;
+      border-radius: 8px;
+
+      &:hover {
+        background: $side-nav-color;
+        color: $default-color;
+        box-shadow: 16px 14px 41px -5px rgba(0, 0, 0, 0.45);
+        -webkit-box-shadow: 16px 14px 41px -5px rgba(0, 0, 0, 0.45);
+        -moz-box-shadow: 16px 14px 41px -5px rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    .app-search {
+      width: 500px;
+    }
+  }
+
   table {
     table-layout: auto;
+
+    .app-done {
+      text-decoration: line-through;
+      opacity: 0.5;
+      animation: ease-in-out;
+    }
   }
+
+
 }
 
-.action-button {
+.app-action-button {
   align-items: center;
   justify-content: center;
 
   mat-icon {
     display: flex;
-    font-size: 14pt;
-    margin-left: 10px;
+    font-size: 0.7em;
+    margin: 3px 0 4px 4px;
+    color: $selected-link;
   }
 
   &:hover {
-    border-radius: 50px;
     background: $default-color;
   }
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 26px;
-
-  button.button-add {
-    display: flex;
-    background: $default-color;
-    align-items: center;
-    justify-content: space-around;
-    min-width: 200px;
-    color: $side-nav-color;
-    height: 40px;
-    padding: 0 24px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-
-    &:hover {
-      background: $side-nav-color;
-      color: $default-color;
-    }
-  }
-}
-
-.search-field {
-  width: 500px;
 }
 
 mat-paginator {

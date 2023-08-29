@@ -26,7 +26,7 @@ export class AppTodoListComponent implements OnInit {
   constructor(
     private taskService: TasksService,
     public dialog: MatDialog,
-    private sneck: MatSnackBar
+    private snack: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class AppTodoListComponent implements OnInit {
       .pipe(
         tap({
           next: (tasks: ITask[]) => {
-            this.tasks = tasks;
+            this.tasks = tasks.sort((a, b) => +a.done - +b.done);
             this.update();
           },
         })
@@ -48,12 +48,11 @@ export class AppTodoListComponent implements OnInit {
   }
 
   searchTask(event: any): void {
-    const text = event.target.value.trim().toLowerCase();
-    const dataFiltered = this.tasks.filter(({ id, title, body }) => {
+    const toLowerCase = (value: string) => value.toLocaleLowerCase();
+    const text = toLowerCase(event.target.value.trim());
+    const dataFiltered = this.tasks.filter(({ title, body }) => {
       return (
-        String(id).toLowerCase().includes(text) ||
-        title.toLowerCase().includes(text) ||
-        body.toString().includes(text)
+        toLowerCase(title).includes(text) || toLowerCase(body).includes(text)
       );
     });
     this.tasksInPage = dataFiltered;
@@ -64,7 +63,7 @@ export class AppTodoListComponent implements OnInit {
       width: `${window.screen.width * 0.8}px`,
       height: `${window.screen.height * 0.45}px`,
       autoFocus: true,
-      data: { task },
+      data: task,
     });
 
     dialogRef.afterClosed().subscribe(() => this.getTasks());
@@ -100,7 +99,10 @@ export class AppTodoListComponent implements OnInit {
 
   toggleDone(task: ITask) {
     this.taskService.updateTask(task.id, task).subscribe({
-      next: (task) => this.sneck.open('Tarefa Atualizada!', 'x', SNACK_DEFAULT),
+      next: (task) => {
+        this.snack.open('Tarefa Atualizada!', 'x', SNACK_DEFAULT);
+        this.getTasks();
+      },
       error: (error) =>
         console.error('A tarefa não pode ser atualizada no menomento.', error),
     });
