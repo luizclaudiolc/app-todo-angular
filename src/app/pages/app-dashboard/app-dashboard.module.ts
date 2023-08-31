@@ -1,16 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppDashboardComponent } from './app-dashboard.component';
+import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { AppDashboardComponent } from './app-dashboard.component';
 
 const appComponents = [AppDashboardComponent];
 const ngxModules = [CommonModule];
+const matModules = [MatCardModule, MatIconModule, NgxGaugeModule];
 
 @NgModule({
   declarations: [...appComponents],
   imports: [
-    ...ngxModules,
     RouterModule.forChild([{ path: '', component: AppDashboardComponent }]),
+    ...ngxModules,
+    ...matModules,
   ],
   exports: [...appComponents],
 })

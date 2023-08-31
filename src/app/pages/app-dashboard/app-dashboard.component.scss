@@ -1,0 +1,101 @@
+$task-not-done: #b34045;
+$task-done: #2d884d;
+$all-tasks: #4091d7;
+
+.app-container {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  .app-info-card {
+    flex: auto;
+    margin: 10px;
+    min-width: 200px;
+    max-width: 400px;
+    height: 150px;
+
+    .app-title-card {
+      font-size: 1.4em;
+      font-weight: 400;
+    }
+
+    .app-content-card {
+      display: flex;
+      flex: auto;
+      padding: 15px;
+      align-items: center;
+      justify-content: space-evenly;
+      font-weight: 400;
+      font-size: 4.5em;
+
+      mat-icon {
+        font-size: 50pt;
+        width: auto;
+        height: auto;
+        margin-right: 1.2rem;
+      }
+
+      & .app-task-done,
+      .app-icon-done {
+        color: $task-done;
+      }
+
+      & .app-task-not-done,
+      .app-icon-not-done {
+        color: $task-not-done;
+      }
+
+      & .app-all-task,
+      .app-icon-all-task {
+        color: $all-tasks;
+      }
+    }
+  }
+
+  .app-chart-card {
+    padding: 20px;
+    display: flex;
+    margin: 5px;
+    align-items: center;
+    width: 600px;
+    min-width: 300px;
+    height: 300px;
+    flex: auto;
+
+    #gauge-char {
+      // max-width: 400px;
+      min-width: 300px;
+      height: 400px;
+    }
+
+    #chart-01 {
+      max-width: 400px;
+      min-width: 300px;
+      height: 400px;
+
+      canvas {
+        max-width: 100%;
+        max-height: 100%;
+
+
+      }
+    }
+  }
+
+}
+
+/* .chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  margin: 30px;
+  width: 300px;
+  flex: auto;
+
+  canvas {
+    max-width: 100%;
+    max-height: 100%;
+  }
+} */

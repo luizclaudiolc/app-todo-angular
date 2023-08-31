@@ -1,1 +1,53 @@
-<p>app-dashboard works!</p>
+<div class="app-container">
+  <mat-card class="app-info-card mat-elevation-z6">
+    <mat-card-header class="app-title-card">Tarefas a fazer</mat-card-header>
+    <mat-card-content class="app-content-card">
+      <mat-icon class="app-icon-not-done">notification_important</mat-icon>
+      <p class="app-task-not-done">{{ taskNotDone }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="app-info-card">
+    <mat-card-header class="app-title-card">Tarefas concluidas</mat-card-header>
+    <mat-card-content class="app-content-card">
+      <mat-icon class="app-icon-done">checklist</mat-icon>
+      <p class="app-task-done">{{ taskDone }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="app-info-card">
+    <mat-card-header class="app-title-card">Total de tarefas</mat-card-header>
+    <mat-card-content class="app-content-card">
+      <mat-icon class="app-icon-all-task">task_alt</mat-icon>
+      <p class="app-all-task">{{ allTasks }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="app-chart-card">
+    <mat-card-content class="app-content-card">
+      <div id="gauge-char"></div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- <mat-card class="app-chart-card">
+    <mat-card-content class="app-content-card">
+      <div id="chart-01">
+        <ngx-gauge
+          [value]="taskDone"
+          [size]="size"
+          [type]="'semi'"
+          [label]="gaugeLabel"
+          [append]="gaugeAppendText"
+          [thresholds]="thresholdConfig"
+          [markers]="marker"
+          cap="butt"
+          [min]="0"
+          [max]="100"
+          [animate]="true"
+          [margin]="18"
+        >
+        </ngx-gauge>
+      </div>
+    </mat-card-content>
+  </mat-card> -->
+</div>
