@@ -3,6 +3,7 @@ import { ITask } from '../shared/interfaces/task.interface';
 import { TasksService } from '../shared/services/tasks.service';
 import * as c3 from 'c3';
 import * as d3 from 'd3';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-app-dashboard',
@@ -66,6 +67,10 @@ export class AppDashboardComponent implements OnInit {
     },
   };
 
+  colors = ['#b34045', '#2d884d', '#4091d7'];
+  donutText?: number;
+  chart1: c3.ChartAPI | undefined;
+
   constructor(private taskService: TasksService) {}
 
   ngOnInit(): void {
@@ -83,6 +88,11 @@ export class AppDashboardComponent implements OnInit {
   }
 
   drawChart(tasks: ITask[]) {
+    this.drawGaugeChart();
+    this.drawPieChart();
+  }
+
+  drawGaugeChart(): void {
     const chart = c3.generate({
       bindto: '#gauge-char',
       data: {
@@ -92,24 +102,15 @@ export class AppDashboardComponent implements OnInit {
           Concluidas: '#f0f',
         },
         onclick: (d, i) => console.log({ onClick: { d, i } }),
-        onmouseover: (d, el) => {
-          const target = el?.getAttribute('class');
-          console.log(target);
-
-          d3.selectAll(`.${target}`).attr('opacity', 0.3);
-          // d3.select(el);
-        },
+        onmouseover: (d, el) => {},
         onmouseout: (d, i) => console.log('onmouseout', { d, i }),
         empty: {
           label: { text: 'Nada de Dados' },
         },
-        names: {
-          test: 'test',
-        },
       },
-      transition: {
-        duration: 3000,
-      },
+      // transition: {
+      //   duration: 3000,
+      // },
       gauge: {
         label: {
           format: (value, ratio) =>
@@ -122,7 +123,7 @@ export class AppDashboardComponent implements OnInit {
         width: 15, // for adjusting arc thickness
       },
       color: {
-        pattern: ['#60B044'],
+        pattern: [this.colors[1]],
         threshold: {
           // unit: 'value', // percentage is default
           // max: 200, // 100 is default
@@ -133,5 +134,61 @@ export class AppDashboardComponent implements OnInit {
         height: 180,
       },
     });
+  }
+
+  drawPieChart(): void {
+    this.chart1 = c3.generate({
+      bindto: '#gauge-chart',
+      data: {
+        columns: [
+          ['Concluidas', this.taskDone],
+          ['A fazer', this.taskNotDone],
+          ['Total', this.allTasks],
+        ],
+        type: 'donut',
+        onclick: function (d, i) {
+          console.log('onclick', d, i);
+        },
+        onmouseover: (d, i) => {
+          // this.mouseOver(d, i);
+        },
+        onmouseout: function (d, i) {
+          console.log('onmouseout', d, i);
+        },
+      },
+      donut: {
+        title: ``,
+        width: 20,
+        label: {
+          format: (value, ratio) => value,
+          show: false,
+        },
+        padAngle: 0.004,
+        expand: {
+          duration: 300,
+        },
+      },
+      color: {
+        pattern: [this.colors[1], this.colors[0], this.colors[2]],
+      },
+      legend: {
+        position: 'right',
+      },
+      size: {
+        height: 180,
+      },
+    });
+  }
+
+  mouseOver(d: any, i: any) {
+    this.donutText = d.value;
+    console.log(this.donutText);
+
+    this.chart1?.flush();
+
+    this.update();
+  }
+  update() {
+    this.chart1?.flush();
   }
 }
