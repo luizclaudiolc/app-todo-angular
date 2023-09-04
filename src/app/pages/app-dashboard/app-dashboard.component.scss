@@ -68,56 +68,8 @@ $all-tasks: #4091d7;
       flex: auto;
       padding: 15px;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-around;
       flex-wrap: wrap;
-
-      #gauge-char {
-        // max-width: 400px;
-        min-width: 300px;
-        height: 400px;
-      }
-
-      #gauge-chart {
-        margin-left: 60px;
-        min-width: 300px;
-        height: 400px;
-      }
-
-      #chart-01 {
-        max-width: 400px;
-        min-width: 300px;
-        height: 400px;
-
-        canvas {
-          max-width: 100%;
-          max-height: 100%;
-
-
-        }
-      }
     }
   }
-
-  .c3-chart-arcs-title {
-    background: red;
-    color: red;
-    background-color: red;
-    fill: red
-  }
-
 }
-
-/* .chart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
-  margin: 30px;
-  width: 300px;
-  flex: auto;
-
-  canvas {
-    max-width: 100%;
-    max-height: 100%;
-  }
-} */

@@ -1,0 +1,21 @@
+<div class="pie-title">
+  <p>{{ data[0].title }}</p>
+  <div class="chart-container">
+    <ngx-charts-pie-chart
+      [view]="[180, 180]"
+      [scheme]="colorScheme"
+      [results]="single"
+      [doughnut]="true"
+      [arcWidth]="arcWidth"
+      (activate)="mouseEnter($event)"
+      (deactivate)="mouseLeave($event)"
+      [explodeSlices]="true"
+      class="hide-tooltip"
+    >
+    </ngx-charts-pie-chart>
+    <div class="center-text">{{ percentage }}%</div>
+  </div>
+  <p>
+    {{ data[0].Selectdvalue }}<strong>/{{ data[0].total }}</strong>
+  </p>
+</div>
