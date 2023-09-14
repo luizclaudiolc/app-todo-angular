@@ -1,4 +1,6 @@
-<div class="app-container">
+<mat-spinner *ngIf="!tasksInPage.length"></mat-spinner>
+
+<div class="app-container" *ngIf="tasksInPage.length">
   <div class="app-header-container">
     <h2>Lista de tarefas</h2>
     <div class="app-header-content">

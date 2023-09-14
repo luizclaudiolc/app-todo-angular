@@ -11,12 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { AppTodoListFormModule } from './app-todo-list-form/app-todo-list-form.module';
 import { AppTodoListComponent } from './app-todo-list.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const appComponents = [AppTodoListComponent];
 const appModules = [AppTodoListFormModule];
@@ -36,6 +37,7 @@ const NgModules = [
   MatExpansionModule,
   MatCheckboxModule,
   MatSnackBarModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

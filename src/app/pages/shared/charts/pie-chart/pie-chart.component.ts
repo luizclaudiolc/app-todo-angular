@@ -41,7 +41,7 @@ export class PieChartComponent implements OnInit, OnChanges {
       const { selectName, total, Selectdvalue, color, title, restName } =
         this.data[0];
       this.percentage = this.transformPercentual(
-        Math.floor((Selectdvalue / total) * 100)
+        Math.round((Selectdvalue / total) * 100)
       );
 
       this.single = [
@@ -59,17 +59,19 @@ export class PieChartComponent implements OnInit, OnChanges {
         name: 'myScheme',
         selectable: true,
         group: ScaleType.Ordinal,
-        domain: [color, '#F0F0F0'],
+        domain: [color, 'transparent'],
       };
     }
   }
 
   mouseLeave($event: MouseEvent) {
     console.log($event);
+    this.arcWidth = 0.1;
   }
 
   mouseEnter($event: MouseEvent) {
     console.log($event);
+    this.arcWidth = 0.15;
   }
 
   transformPercentual(value: number): string {

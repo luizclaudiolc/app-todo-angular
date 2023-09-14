@@ -1,10 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { IPieData } from '../shared/charts/pie-chart/pie-chart.component';
 import { ITask } from '../shared/interfaces/task.interface';
 import { TasksService } from '../shared/services/tasks.service';
-import * as c3 from 'c3';
-import * as d3 from 'd3';
-import { timer } from 'rxjs';
-import { IPieData } from '../shared/charts/pie-chart/pie-chart.component';
 
 @Component({
   selector: 'app-app-dashboard',

@@ -1,33 +1,49 @@
 <div class="app-container">
   <mat-card class="app-info-card mat-elevation-z6">
-    <mat-card-header class="app-title-card">Tarefas a fazer</mat-card-header>
-    <mat-card-content class="app-content-card">
-      <mat-icon class="app-icon-not-done">notification_important</mat-icon>
-      <p class="app-task-not-done">{{ taskNotDone }}</p>
-    </mat-card-content>
+    <ng-container *ngIf="taskNotDone; else spinner">
+      <mat-card-header class="app-title-card">Tarefas a fazer</mat-card-header>
+      <mat-card-content class="app-content-card">
+        <mat-icon class="app-icon-not-done">notification_important</mat-icon>
+        <p class="app-task-not-done">{{ taskNotDone }}</p>
+      </mat-card-content>
+    </ng-container>
   </mat-card>
 
   <mat-card class="app-info-card">
-    <mat-card-header class="app-title-card">Tarefas concluidas</mat-card-header>
-    <mat-card-content class="app-content-card">
-      <mat-icon class="app-icon-done">checklist</mat-icon>
-      <p class="app-task-done">{{ taskDone }}</p>
-    </mat-card-content>
+    <ng-container *ngIf="taskDone; else spinner">
+      <mat-card-header class="app-title-card"
+        >Tarefas concluidas</mat-card-header
+      >
+      <mat-card-content class="app-content-card">
+        <mat-icon class="app-icon-done">checklist</mat-icon>
+        <p class="app-task-done">{{ taskDone }}</p>
+      </mat-card-content>
+    </ng-container>
   </mat-card>
 
   <mat-card class="app-info-card">
-    <mat-card-header class="app-title-card">Total de tarefas</mat-card-header>
-    <mat-card-content class="app-content-card">
-      <mat-icon class="app-icon-all-task">task_alt</mat-icon>
-      <p class="app-all-task">{{ allTasks }}</p>
-    </mat-card-content>
+    <ng-container *ngIf="allTasks; else spinner">
+      <mat-card-header class="app-title-card">Total de tarefas</mat-card-header>
+      <mat-card-content class="app-content-card">
+        <mat-icon class="app-icon-all-task">task_alt</mat-icon>
+        <p class="app-all-task">{{ allTasks }}</p>
+      </mat-card-content>
+    </ng-container>
   </mat-card>
 
   <mat-card class="app-chart-card">
     <mat-card-content class="app-content-card">
-      <app-pie-chart [app-data]="dataAFazer"></app-pie-chart>
-      <app-pie-chart [app-data]="dataConcluidas"></app-pie-chart>
-      <app-pie-chart [app-data]="dataAll"></app-pie-chart>
+      <ng-container
+        *ngIf="dataAFazer && dataConcluidas && dataAll; else spinner"
+      >
+        <app-pie-chart [app-data]="dataAFazer"></app-pie-chart>
+        <app-pie-chart [app-data]="dataConcluidas"></app-pie-chart>
+        <app-pie-chart [app-data]="dataAll"></app-pie-chart>
+      </ng-container>
     </mat-card-content>
   </mat-card>
+
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>
