@@ -16,7 +16,15 @@
     </ngx-charts-pie-chart>
     <div class="center-text">{{ percentage }}%</div>
   </div>
-  <p>
-    {{ data[0].Selectdvalue }}<strong>/{{ data[0].total }}</strong>
-  </p>
+  <ng-container *ngIf="data[0].description; else description">
+    <p>
+      {{ data[0].description }}
+    </p>
+  </ng-container>
+
+  <ng-template #description>
+    <p>
+      {{ data[0].Selectdvalue }}<strong>/{{ data[0].total }}</strong>
+    </p>
+  </ng-template>
 </div>

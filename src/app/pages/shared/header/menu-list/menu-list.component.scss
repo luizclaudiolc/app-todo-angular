@@ -1,0 +1,31 @@
+$text-color: #191717;
+$base-color: #F1EFEF;
+$focus-color: #CCC8AA;
+$position-color: #7D7C7C;
+
+.app-container {
+  width: 100%;
+  background-color: $base-color;
+  padding: 5px;
+
+  .app-icon-center {
+    margin-top: 8px;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.app-icon {
+  color: $position-color;
+}
+
+.app-menu-label {
+  color: $text-color;
+}
+
+.router-link-active {
+  background: $base-color;
+}

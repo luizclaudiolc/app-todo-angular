@@ -1,8 +1,11 @@
-$default-color: #219ebc;
-$side-nav-color: #caf0f8;
-$text-color: #e9c46a;
-$selected-link: #023047;
-$background-color: #f0f0f0;
+// $default-color: #219ebc;
+// $side-nav-color: #caf0f8;
+// $selected-link: #023047;
+// $background-color: #f0f0f0;
+$text-color: #191717;
+$base-color: #F1EFEF;
+$focus-color: #CCC8AA;
+$position-color: #7D7C7C;
 
 .app-container {
   padding: 1.5rem 2rem 3rem;
@@ -18,17 +21,18 @@ $background-color: #f0f0f0;
 
     button.app-button-add {
       display: flex;
-      background: $default-color;
+      background: $position-color;
       align-items: center;
       justify-content: space-around;
       min-width: 100px;
-      color: $side-nav-color;
+      color: $text-color;
       padding: 0 40px;
       border-radius: 8px;
 
       &:hover {
-        background: $side-nav-color;
-        color: $default-color;
+        background: $position-color;
+        color: $text-color;
+        opacity: 0.8;
         box-shadow: 16px 14px 41px -5px rgba(0, 0, 0, 0.45);
         -webkit-box-shadow: 16px 14px 41px -5px rgba(0, 0, 0, 0.45);
         -moz-box-shadow: 16px 14px 41px -5px rgba(0, 0, 0, 0.45);
@@ -41,6 +45,10 @@ $background-color: #f0f0f0;
   }
 
   table {
+    .app-header-table {
+      background-color: $base-color;
+    }
+
     table-layout: auto;
 
     .app-done {
@@ -61,16 +69,17 @@ $background-color: #f0f0f0;
     display: flex;
     font-size: 0.7em;
     margin: 3px 0 4px 4px;
-    color: $selected-link;
+    color: $position-color;
   }
 
   &:hover {
-    background: $default-color;
+    background: $base-color;
   }
 }
 
 mat-paginator {
   box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.2);
+  background-color: $base-color;
 }
 
 button {

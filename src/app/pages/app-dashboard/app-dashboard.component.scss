@@ -56,9 +56,11 @@ $all-tasks: #4091d7;
   .app-chart-card {
     padding: 20px;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 5px;
     align-items: center;
-    width: 600px;
+    width: 700px;
     min-width: 300px;
     height: auto;
     flex: auto;

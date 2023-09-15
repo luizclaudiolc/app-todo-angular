@@ -15,6 +15,7 @@ export interface IPieData {
   total: number;
   color: string;
   title: string;
+  description?: string;
 }
 
 @Component({

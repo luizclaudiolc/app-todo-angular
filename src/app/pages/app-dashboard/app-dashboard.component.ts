@@ -82,6 +82,10 @@ export class AppDashboardComponent implements OnInit {
         restName: restName,
         total: this.getLengthTask(tasks, 'all'),
         color,
+        description:
+          tasksLength === 'all'
+            ? `Todas as tarefas: ${this.getLengthTask(tasks, 'all')}`
+            : '',
       },
     ];
   }

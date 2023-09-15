@@ -69,7 +69,11 @@
       </ng-container>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="columnsTable"
+      class="app-header-table"
+    ></tr>
     <tr
       mat-row
       *matRowDef="let row; columns: columnsTable"

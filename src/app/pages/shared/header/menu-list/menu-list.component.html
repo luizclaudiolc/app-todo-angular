@@ -1,0 +1,26 @@
+<mat-toolbar fxLayout="row" class="app-container mat-elevation-z6">
+  <button mat-icon-button [matMenuTriggerFor]="menu" fxShow.xs>
+    <mat-icon> menu </mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <ng-container *ngFor="let item of itemsMenuBars">
+      <button
+        mat-menu-item
+        [routerLink]="item.link"
+        routerLinkActive="router-link-active"
+      >
+        <mat-icon class="app-icon">{{ item.icon }}</mat-icon>
+        <span class="app-menu-label">{{ item.label }}</span>
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <span class="app-icon-center" fxFlex fxLayoutAlign="center">
+    <a routerLink="/">
+      <img
+        src="https://play-lh.googleusercontent.com/pjUulZ-Vdo7qPKxk3IRhnk8SORPlgSydSyYEjm7fGcoXO8wDyYisWXwQqEjMryZ_sqK2"
+        alt="logo"
+      />
+    </a>
+  </span>
+</mat-toolbar>

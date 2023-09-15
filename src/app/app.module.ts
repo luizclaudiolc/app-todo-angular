@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PieChartComponent } from './pages/shared/charts/pie-chart/pie-chart.component';
+import { MenuListModule } from './pages/shared/header/menu-list/menu-list.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +26,7 @@ import { PieChartComponent } from './pages/shared/charts/pie-chart/pie-chart.com
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MenuListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
